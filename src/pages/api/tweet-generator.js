@@ -8,6 +8,11 @@ export default async function handler(req, res) {
   });
 
   try {
+    const input = {};
+
+for await (const event of replicate.stream("meta/llama-2-13b-chat", { input })) {
+  process.stdout.write(event.toString());
+};
     const output = await replicate.run(
       "a16z-infra/llama13b-v2-chat:6b4da803a2382c08868c5af10a523892f38e2de1aafb2ee55b020d9efef2fdb8",
       {
